@@ -7,6 +7,7 @@ const filters = { REQUEST: true, RESPONSE: true, ERROR: true };
 
 function init() {
   document.getElementById('refreshBtn').addEventListener('click', loadLogs);
+  document.getElementById('exportBtn').addEventListener('click', exportLogs);
   document.getElementById('clearBtn').addEventListener('click', clearLogs);
   document.getElementById('showReq').addEventListener('change',  e => { filters.REQUEST  = e.target.checked; render(); });
   document.getElementById('showResp').addEventListener('change', e => { filters.RESPONSE = e.target.checked; render(); });
@@ -26,6 +27,17 @@ async function loadLogs() {
   const { llmLogs = [] } = await chrome.storage.local.get('llmLogs');
   allEntries = llmLogs;
   render();
+}
+
+function exportLogs() {
+  const json = JSON.stringify(allEntries, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `busybot-llm-logs-${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 async function clearLogs() {
