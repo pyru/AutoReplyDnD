@@ -1,0 +1,6 @@
+# Never commit secrets
+.env
+config.js
+
+# Claude Code project files
+.claude/

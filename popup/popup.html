@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Busy Bot</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ── Header ─────────────────────────────────────────────── -->
+    <header class="header">
+      <div class="title">
+        <span class="icon">🤖</span>
+        <span>Busy Bot</span>
+      </div>
+      <div class="controls">
+        <button id="toggleBtn" class="toggle-btn" title="Toggle auto-reply">
+          <span id="toggleDot">⚪</span>
+          <span id="toggleLabel">OFF</span>
+        </button>
+        <button id="logsBtn"     class="icon-btn" title="LLM Logs">📋</button>
+        <button id="settingsBtn" class="icon-btn" title="Settings">⚙️</button>
+      </div>
+    </header>
+
+    <!-- ── Status bar ─────────────────────────────────────────── -->
+    <div class="statusbar">
+      <span id="statusText">Loading…</span>
+      <span id="agentBadge" class="badge hidden">🔄 Agent Running</span>
+    </div>
+
+    <!-- ── Reasoning Chain ────────────────────────────────────── -->
+    <section class="panel">
+      <div class="panel-title">🔍 AGENT REASONING CHAIN</div>
+      <div id="chain" class="chain">
+        <p class="empty">Enable the bot, then open WhatsApp Web or Telegram Web to see the agent in action.</p>
+      </div>
+    </section>
+
+    <!-- ── Reply Log ──────────────────────────────────────────── -->
+    <section class="panel">
+      <div class="panel-header">
+        <div class="panel-title">📜 Reply Log</div>
+        <button id="clearBtn" class="text-btn">Clear</button>
+      </div>
+      <div id="log" class="log">
+        <p class="empty">No replies sent yet.</p>
+      </div>
+    </section>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

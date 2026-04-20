@@ -1,0 +1,264 @@
+/* popup.css — dark-themed popup for Busy Bot */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0d0d0d;
+  --surface: #161616;
+  --surface2: #1e1e1e;
+  --border: #2a2a2a;
+  --text: #e0e0e0;
+  --text-muted: #777;
+  --green: #3dba72;
+  --green-bg: #122a1e;
+  --green-border: #1e5c3a;
+  --blue: #5ba4ff;
+  --blue-bg: #0e1e38;
+  --amber: #e0a040;
+  --red: #e05050;
+  --purple: #a070e0;
+  --purple-bg: #1a1030;
+}
+
+html { font-size: 13px; }
+
+body {
+  width: 380px;
+  min-height: 480px;
+  max-height: 600px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  overflow-y: auto;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+/* ── App wrapper ─────────────────────────────────────────────────── */
+.app { display: flex; flex-direction: column; min-height: 100%; }
+
+/* ── Header ──────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 15px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.2px;
+}
+
+.icon { font-size: 20px; line-height: 1; }
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Toggle button */
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  letter-spacing: 0.4px;
+}
+
+.toggle-btn.on {
+  background: var(--green-bg);
+  border-color: var(--green-border);
+  color: var(--green);
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  padding: 4px 5px;
+  border-radius: 5px;
+  line-height: 1;
+  transition: background 0.15s;
+}
+.icon-btn:hover { background: var(--surface2); }
+
+/* ── Status bar ──────────────────────────────────────────────────── */
+.statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 15px;
+  background: #101010;
+  border-bottom: 1px solid var(--border);
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: var(--blue-bg);
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 600;
+  animation: blink 1.4s ease infinite;
+}
+.badge.hidden { display: none; }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
+
+/* ── Panels ──────────────────────────────────────────────────────── */
+.panel {
+  padding: 11px 14px;
+  border-bottom: 1px solid #191919;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.panel-title {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.panel-header .panel-title { margin-bottom: 0; }
+
+.text-btn {
+  background: none;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+.text-btn:hover { color: #999; }
+
+/* ── Reasoning Chain ─────────────────────────────────────────────── */
+.chain {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 270px;
+  overflow-y: auto;
+}
+
+.step {
+  padding: 8px 10px;
+  border-radius: 7px;
+  border-left: 3px solid var(--border);
+  background: var(--surface);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+/* Status variants */
+.step.done     { border-left-color: var(--green); }
+.step.stopped  { border-left-color: var(--amber); }
+.step.running  { border-left-color: var(--blue); animation: stepPulse 1.1s ease infinite; }
+.step.failed   { border-left-color: var(--red); }
+.step.summary  { border-left-color: var(--purple); background: var(--purple-bg); }
+
+@keyframes stepPulse {
+  0%, 100% { background: var(--surface); }
+  50%       { background: #141828; }
+}
+
+.step-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.step-icon { font-size: 13px; }
+
+.step-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ddd;
+}
+
+.step-body {
+  font-size: 11.5px;
+  color: #999;
+  line-height: 1.5;
+  padding-left: 19px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.step-arrow {
+  font-size: 11px;
+  color: #555;
+  padding-left: 19px;
+  margin-top: 3px;
+}
+
+/* ── Reply Log ───────────────────────────────────────────────────── */
+.log {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 130px;
+  overflow-y: auto;
+}
+
+.log-entry {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: var(--surface);
+  font-size: 12px;
+}
+
+.log-time   { color: var(--text-muted); font-size: 11px; min-width: 52px; }
+.log-sender { color: var(--text); font-weight: 600; }
+.log-plat   { color: #555; font-size: 11px; }
+.log-tick   { color: var(--green); margin-left: auto; font-size: 13px; }
+
+/* ── Empty states ────────────────────────────────────────────────── */
+.empty {
+  color: #444;
+  font-size: 11.5px;
+  text-align: center;
+  padding: 14px 0;
+  font-style: italic;
+}

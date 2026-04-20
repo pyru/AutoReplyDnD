@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Busy Bot — Settings</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div class="page">
+
+    <header class="page-header">
+      <span class="page-icon">🤖</span>
+      <div>
+        <h1>Busy Bot Settings</h1>
+        <p class="subtitle">Configure your AI-powered DnD auto-reply agent</p>
+      </div>
+    </header>
+
+    <!-- API Key -->
+    <section class="card">
+      <h2>🔑 Gemini API Key</h2>
+      <p class="desc">Required to power the Gemini agentic loop. Pre-filled from <code>.env</code>. Override here if needed. Get a key at <strong>aistudio.google.com</strong>.</p>
+      <div class="input-row">
+        <input
+          type="password"
+          id="apiKey"
+          class="text-input"
+          placeholder="AIzaSy…"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button id="toggleApiVis" class="icon-btn" title="Show / hide key">👁️</button>
+      </div>
+      <p id="apiStatus" class="status-msg"></p>
+    </section>
+
+    <!-- DnD Schedule -->
+    <section class="card">
+      <h2>⏰ Do Not Disturb Schedule</h2>
+      <p class="desc">Auto-replies are sent <strong>only</strong> while DnD is active (within the time window below).</p>
+      <div class="time-row">
+        <div class="time-group">
+          <label for="dndStart">Start</label>
+          <input type="time" id="dndStart" class="time-input" value="09:00">
+        </div>
+        <span class="time-sep">→</span>
+        <div class="time-group">
+          <label for="dndEnd">End</label>
+          <input type="time" id="dndEnd" class="time-input" value="18:00">
+        </div>
+      </div>
+      <div id="dndPreview" class="dnd-preview"></div>
+
+      <div class="inline-setting" style="margin-top:14px;">
+        <label for="maxReplies" class="inline-label">Max replies per sender per day</label>
+        <input type="number" id="maxReplies" class="number-input" min="1" max="50" value="10">
+        <span class="hint-inline">Currently set to <strong id="maxRepliesDisplay">10</strong> — the agent will stop replying to the same person after this count resets at midnight.</span>
+      </div>
+    </section>
+
+    <!-- Custom Template -->
+    <section class="card">
+      <h2>💬 Custom Reply Template <span class="optional">(optional)</span></h2>
+      <p class="desc">
+        Override the AI-generated reply with a fixed message. Leave blank to let Claude compose
+        context-aware replies.
+      </p>
+      <textarea
+        id="customTemplate"
+        class="textarea"
+        rows="3"
+        placeholder="Hey {name}! I'm in a deep work session right now — I'll get back to you soon! 🙏"
+      ></textarea>
+      <p class="hint">Use <code>{name}</code> as a placeholder for the sender's name.</p>
+    </section>
+
+    <!-- Reset -->
+    <section class="card">
+      <h2>🔄 Reset Reply History</h2>
+      <p class="desc">
+        The agent skips senders it already replied to today. Click below to reset that tracking
+        and allow fresh replies to all contacts.
+      </p>
+      <button id="resetHistory" class="danger-btn">Reset "Already Replied Today" History</button>
+      <p id="resetStatus" class="status-msg"></p>
+    </section>
+
+    <!-- Save -->
+    <div class="save-row">
+      <button id="saveBtn" class="save-btn">💾 Save Settings</button>
+      <p id="saveStatus" class="status-msg"></p>
+    </div>
+
+  </div>
+  <script src="settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Busy Bot — LLM Logs</title>
+  <link rel="stylesheet" href="logs.css">
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <span class="logo">🤖</span>
+      <h1>LLM Logs <span class="sub">— Gemini API Call History</span></h1>
+      <div class="topbar-actions">
+        <span id="count" class="count-badge">0 entries</span>
+        <button id="refreshBtn" class="btn-outline">↻ Refresh</button>
+        <button id="clearBtn"   class="btn-danger">🗑 Clear</button>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <label class="filter-label">
+        <input type="checkbox" id="showReq"  checked> Requests
+      </label>
+      <label class="filter-label">
+        <input type="checkbox" id="showResp" checked> Responses
+      </label>
+      <label class="filter-label">
+        <input type="checkbox" id="showErr"  checked> Errors
+      </label>
+      <span class="divider">|</span>
+      <span class="hint">Full JSON in DevTools: <kbd>chrome://extensions</kbd> → Busy Bot → <kbd>Service Worker</kbd></span>
+    </div>
+
+    <div id="logList" class="log-list">
+      <div class="empty">No LLM calls recorded yet. Enable the bot and trigger a message.</div>
+    </div>
+  </div>
+  <script src="logs.js"></script>
+</body>
+</html>
