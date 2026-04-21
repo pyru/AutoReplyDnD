@@ -115,7 +115,7 @@ Step 4 → send_auto_reply         Compose and send the reply
 ```
 
 If any step says "stop" (DnD not active, daily limit reached), the bot stops and explains why in the popup.
-
+https://www.youtube.com/watch?v=fo2meDx-qHA
 ---
 
 ## Troubleshooting
